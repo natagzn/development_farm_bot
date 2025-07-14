@@ -18,12 +18,12 @@ this.bot = new Telegraf(token);
 this.bot.start((ctx) => {
   ctx.reply('Натисни кнопку нижче, щоб відкрити WebApp 👇', {
     reply_markup: {
-      keyboard: [
+       inline_keyboard: [
         [
           {
-            text: 'Відкрити WebApp',
+            text: 'Відкрити WebApp :)',
             web_app: {
-              url: 'https://a8ff320bca05.ngrok-free.app', 
+              url: 'https://6052c7198b47.ngrok-free.app', 
             },
           },
         ],

@@ -14,8 +14,17 @@ export class AuthController {
   }
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
-  getMe(@Req() req: any) {
-    console.log("userId:", req.user);
-    return { message: 'Success!', userId: req.user.userId };
+  async getMe(@Req() req: any) {
+    const userId = req.user.userId;
+    const user = await this.authService.getUserById(userId);
+
+    if (!user) {
+      return { message: 'User not found' };
+    }
+
+    return {
+      message: 'Success!',
+      user,
+    };
   }
 }

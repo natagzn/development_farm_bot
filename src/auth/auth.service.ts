@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../prisma/prisma.service';
 import { PublicKeyDto } from './dto/public-key.dto';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -38,5 +39,10 @@ export class AuthService {
 
     const token = this.jwtService.sign({ userId: user.id });
     return { token };
+  }
+  async getUserById(userId: number): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: { id: userId },
+    });
   }
 }

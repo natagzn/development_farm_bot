@@ -1,19 +1,21 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
-import { TonConnectDto } from './dto/ton-connect.dto';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { PublicKeyDto } from './dto/public-key.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get('ton')
-  async ton() {
-    return 'hello worlg';
-  }
-
   @Post('ton-connect')
-  async tonConnect(@Body() dto: TonConnectDto) {
-      console.log('dto:', dto); // DEBUG
-    return this.authService.tonLoginOrRegister(dto.address);
+  async loginOrRegister(@Body() dto: PublicKeyDto) {
+    console.log(dto);
+    return this.authService.loginOrRegister(dto);
+  }
+  @UseGuards(AuthGuard('jwt'))
+  @Get('me')
+  getMe(@Req() req: any) {
+    console.log("userId:", req.user);
+    return { message: 'Success!', userId: req.user.userId };
   }
 }

@@ -1,30 +1,42 @@
 import { Injectable } from '@nestjs/common';
-//import { JwtService } from '@nestjs/jwt';
-//import { PrismaService } from '../prisma/prisma.service'; // якщо ти використовуєш Prisma
+import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '../../prisma/prisma.service';
+import { PublicKeyDto } from './dto/public-key.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    //private readonly prisma: PrismaService,
-    //private readonly jwt: JwtService
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService,
   ) {}
+  async loginOrRegister(data: PublicKeyDto) {
+    const { telegramUser, publicKey } = data;
 
-  async tonLoginOrRegister(address: string) {
-    /*let user = await this.prisma.user.findUnique({
-      where: { walletAddress: address }
+    if (!telegramUser?.id) {
+      throw new Error('Telegram ID is required');
+    }
+
+    const telegramId = telegramUser.id.toString();
+
+    let user = await this.prisma.user.findUnique({
+      where: { telegramId },
     });
 
     if (!user) {
-      user = await this.prisma.user.create({
-        data: {
-          walletAddress: address
-        }
-      });
+      const userData: any = {
+        telegramId,
+        wallet: publicKey,
+      };
+
+      if (telegramUser.first_name) userData.firstName = telegramUser.first_name;
+      if (telegramUser.last_name) userData.lastName = telegramUser.last_name;
+      if (telegramUser.username) userData.username = telegramUser.username;
+      if (telegramUser.photo_url) userData.photo_url = telegramUser.photo_url;
+
+      user = await this.prisma.user.create({ data: userData });
     }
 
-    const token = this.jwt.sign({ userId: user.id });*/
-    //return { token };
-    console.log('Helo World!')
-    return address;
+    const token = this.jwtService.sign({ userId: user.id });
+    return { token };
   }
 }

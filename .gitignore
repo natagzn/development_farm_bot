@@ -1,6 +1,10 @@
 # compiled output
 /dist
 /node_modules
+<<<<<<< HEAD
+=======
+/build
+>>>>>>> 43bc0fe14a23d5bca752b782407d8a1814c2e8a7
 
 # Logs
 logs
@@ -33,4 +37,29 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+<<<<<<< HEAD
 .adminjs
+=======
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# temp directory
+.temp
+.tmp
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+/generated/prisma
+>>>>>>> 43bc0fe14a23d5bca752b782407d8a1814c2e8a7

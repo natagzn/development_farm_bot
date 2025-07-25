@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { PublicKeyDto } from './dto/public-key.dto.js';
+
 import { User } from '@prisma/client';
 
 @Injectable()

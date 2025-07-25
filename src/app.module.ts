@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AdminModule } from '@adminjs/nestjs';
 import { ConfigModule } from '@nestjs/config';
-import { Resource, Database, Adapter } from '@adminjs/sql'
-import AdminJS from 'adminjs';
+import { Database, Resource, getModelByName } from '@adminjs/prisma'
+import AdminJS from 'adminjs'
 
+import { PrismaService } from './prisma.service.js'
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+
+import {TelegramModule} from './telegram/telegram.module.js';
+import { AuthModule } from './auth/auth.module.js';
+import { PrismaModule } from '../prisma/prisma.module.js';
+
+
 
 AdminJS.registerAdapter({
   Database,
@@ -23,13 +30,15 @@ AdminJS.registerAdapter({
           connectionString: process.env.DATABASE_URL,
           database: process.env.DATABASE_NAME,
         };
-        const db = await new Adapter('postgresql', options).init();
+        const prisma = new PrismaService()
 
         return {
           adminJsOptions: {
             rootPath: '/admin',
-            // Rename "organizations" to your table name or set "resources" to []
-            resources: [db.table('organizations')],
+            resources: [{
+              resource: { model: getModelByName('User'), client: prisma },
+              options: {},
+            }],
           },
           auth: {
             authenticate: async (email, password) => {
@@ -45,7 +54,7 @@ AdminJS.registerAdapter({
           },
         }
       },
-    })
+    }), TelegramModule, AuthModule, PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

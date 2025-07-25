@@ -1,39 +1,22 @@
 {
-  "compilerOptions": {
-<<<<<<< HEAD
-    "module": "NodeNext",
-=======
-    "module": "commonjs",
->>>>>>> 43bc0fe14a23d5bca752b782407d8a1814c2e8a7
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-<<<<<<< HEAD
-    "target": "ES2021",
-=======
-    "target": "ES2023",
->>>>>>> 43bc0fe14a23d5bca752b782407d8a1814c2e8a7
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-<<<<<<< HEAD
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  },
-  "include": ["src/**/*"]
-=======
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
-  }
->>>>>>> 43bc0fe14a23d5bca752b782407d8a1814c2e8a7
+    "compilerOptions": {
+        "module": "NodeNext",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "ES2021",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "incremental": true,
+        "skipLibCheck": true,
+        "strictNullChecks": false,
+        "noImplicitAny": false,
+        "strictBindCallApply": false,
+        "forceConsistentCasingInFileNames": false,
+        "noFallthroughCasesInSwitch": false
+    },
+    "include": ["src/**/*"]
 }
